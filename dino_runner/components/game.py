@@ -24,8 +24,13 @@ class Game:
         self.running = False
         self.score = 0
         self.death_count = 0
-        
+        self.games_played = 0
+        self.highest_score = 0
 
+        if self.score > self.highest_score:
+            self.highest_score = self.score
+
+        
     def execute(self):
         self.running = True
         while self.running:
@@ -79,11 +84,15 @@ class Game:
         self.menu.reset_screen_color(self.screen)
         half_screen_width = SCREEN_WIDTH // 2
         half_screen_height = SCREEN_HEIGHT // 2
+        font = pygame.font.Font(FONT_STYLE, 30)
 
         if self.death_count == 0:
             self.menu.draw(self.screen)
         else:
-            self.menu.update_message("New message")
+            self.menu.update_message("Press a key to play again")
+            self.draw_final_score()
+            self.show_death_count()
+            self.show_high_score()
             self.menu.draw(self.screen)
 
         self.screen.blit(ICON,(half_screen_width - 50, half_screen_height - 140))
@@ -102,4 +111,31 @@ class Game:
         text_rect = text.get_rect()
         text_rect.center = (1000, 50)
         self.screen.blit(text, text_rect)
+
+    def draw_final_score(self):
+        half_screen_width = SCREEN_WIDTH // 2
+        half_screen_height = SCREEN_HEIGHT // 2
+        font = pygame.font.Font(FONT_STYLE, 30)
+        text = font.render(f"You score: {self.score}", True, (0, 0, 0))
+        text_rect = text.get_rect()
+        text_rect.center = (half_screen_width, half_screen_height)
+        self.screen.blit(text, text_rect)
+
+    def show_death_count(self):
+        font = pygame.font.Font(FONT_STYLE, 30)
+        text = font.render(f"Your deaths: {self.death_count}", True, (0, 0, 0))
+        text_rect = text.get_rect()
+        text_rect.center = (550, 350)
+        self.screen.blit(text, text_rect)
+
+
+    def show_high_score(self):
+        font = pygame.font.Font(FONT_STYLE, 30)
+        text = font.render(f"High score: {self.highest_score}", True, (0, 0, 0))
+        text_rect = text.get_rect()
+        text_rect.center = (550, 400)
+        self.screen.blit(text, text_rect)
+
+
+
 
