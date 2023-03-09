@@ -11,19 +11,20 @@ class PowerUpManager:
         self.when_appears = random.randint(200, 300)
         self.duration = random.randint(3 , 5)
 
-    def generate_power_up(self):
+    def generate_power_up(self, type):
         self.when_appears += random.randint(200, 300)
+        self.type.wings = WINGS
+        self.type.shield = SHIELD
         power_up = Shield()
         power_up = Wings()
         type = random.randint(0,1)
         if type == 0:
-                wings = Wings(WINGS)
+                power_up = Wings(WINGS)
                 self.obstacles.append(WINGS)
         elif type == 1:
-                shield = Shield(SHIELD)
+                power_up = Shield(SHIELD)
                 self.obstacles.append(SHIELD) 
         self.power_ups.append(power_up)
-
 
     def update(self, game):
         if len(self.power_ups) == 0 and self.when_appears == game.score:

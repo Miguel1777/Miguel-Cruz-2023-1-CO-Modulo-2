@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE, DEFAULT_TYPE
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, FONT_STYLE, DEFAULT_TYPE, CLOUD
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.menu import Menu
@@ -72,6 +72,7 @@ class Game:
         self.obstacle_manager.draw(self.screen)
         self.power_up_manager.draw(self.screen)
         pygame.display.update()
+        self.draw_cloud()
         self.draw_power_up_time()
         self.draw_score()
         pygame.display.flip()
@@ -150,6 +151,16 @@ class Game:
             else:
                 self.has_power_up = False
                 self.player.type = DEFAULT_TYPE
+
+    def draw_cloud(self, screen):
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        image = CLOUD
+        image_rect = image.get_rect()
+        image.rect.x =  1300
+        image.rect.y = 900
+        self.screen.blit(self.image, (self.image.x, self.image.y))
+
+
 
 
 
