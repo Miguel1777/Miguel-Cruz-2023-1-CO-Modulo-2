@@ -2,6 +2,8 @@ import pygame
 import random
 
 from dino_runner.components.power_ups.shield import Shield
+from dino_runner.components.power_ups.wings import Wings
+from dino_runner.utils.constants import SHIELD, WINGS
 
 class PowerUpManager:
     def __init__(self):
@@ -12,6 +14,14 @@ class PowerUpManager:
     def generate_power_up(self):
         self.when_appears += random.randint(200, 300)
         power_up = Shield()
+        power_up = Wings()
+        type = random.randint(0,1)
+        if type == 0:
+                wings = Wings(WINGS)
+                self.obstacles.append(WINGS)
+        elif type == 1:
+                shield = Shield(SHIELD)
+                self.obstacles.append(SHIELD) 
         self.power_ups.append(power_up)
 
 

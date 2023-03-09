@@ -92,7 +92,7 @@ class Game:
         font = pygame.font.Font(FONT_STYLE, 30)
 
         if self.death_count == 0:
-            self.menu.draw(self.screen)
+            self.menu.draw(self.screen , "Press any key to start")
         else:
             self.menu.update_message("Press a key to play again")
             self.draw_final_score()
